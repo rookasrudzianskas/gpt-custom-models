@@ -6,7 +6,7 @@ type Props = {
 
 const Chat = ({chatId}: Props) => {
   return (
-    <div>
+    <div className="flex flex-1">
       Chat
     </div>
   );
