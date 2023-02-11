@@ -1,5 +1,5 @@
 'use client'
-import React, {useState} from 'react';
+import React, {FormEvent, useState} from 'react';
 import {PaperAirplaneIcon} from "@heroicons/react/20/solid";
 import {useSession} from "next-auth/react";
 
@@ -10,6 +10,13 @@ type Props = {
 const ChatInput = ({chatId}: Props) => {
   const [prompt, setPrompt] = useState('')
   const {data: session} = useSession()
+
+  const sendMessage = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+
+  }
+
   return (
     <div className="bg-gray-700/50 text-gray-400 rounded-lg text-sm focus:outline-none">
       <form className="p-5 space-x-5 flex">
