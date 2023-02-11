@@ -1,6 +1,10 @@
 import React from 'react';
 
-const Chat = ({}) => {
+type Props = {
+  chatId: string
+}
+
+const Chat = ({chatId}: Props) => {
   return (
     <div>
       Chat

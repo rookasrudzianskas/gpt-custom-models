@@ -1,6 +1,10 @@
 import React from 'react';
 
-const ChatInput = ({}) => {
+type Props = {
+  chatId: string
+}
+
+const ChatInput = ({chatId}: Props) => {
   return (
     <div>
       CjatInput
