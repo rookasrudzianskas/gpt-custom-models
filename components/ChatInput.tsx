@@ -15,7 +15,7 @@ const ChatInput = ({chatId}: Props) => {
   const {data: session} = useSession()
   const model = "davinci"
 
-  const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
+  const sendMessage = async (e:  React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     if (!prompt) return
     const input = prompt.trim()
@@ -64,7 +64,7 @@ const ChatInput = ({chatId}: Props) => {
                value={prompt}
                onChange={(e) => setPrompt(e.target.value)}
         />
-        <button className="bg-[#11A37F] hover:opacity-50 text-white font-bold  px-4 py-2 rounded disabled:bg-gray-300 disabled:cursor-not-allowed" disabled={!session || !prompt}>
+        <button onClick={(e) => sendMessage(e)} className="bg-[#11A37F] hover:opacity-50 text-white font-bold  px-4 py-2 rounded disabled:bg-gray-300 disabled:cursor-not-allowed" disabled={!session || !prompt}>
           <PaperAirplaneIcon className="h-4 w-4 -rotate-45" />
         </button>
       </form>
