@@ -12,6 +12,7 @@ type Props = {
 const ChatInput = ({chatId}: Props) => {
   const [prompt, setPrompt] = useState('')
   const {data: session} = useSession()
+  const model = "davinci"
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -38,9 +39,11 @@ const ChatInput = ({chatId}: Props) => {
       body: JSON.stringify({
         prompt: input,
         chatId: chatId,
-        model: '',
+        model: model,
         session: session
       }),
+    }).then((res) => {
+      // Toast notification
     })
   }
 
