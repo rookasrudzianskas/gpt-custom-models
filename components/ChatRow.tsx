@@ -16,10 +16,7 @@ const ChatRow = ({id}: Props) => {
   const router = useRouter()
   const {data: session} = useSession()
   const [active, setActive] = useState(false)
-  const [messages] = useCollection(query(
-    collection(db, 'users', session?.user?.email!, 'chats', id, 'messages'),
-    orderBy('createdAt', 'asc')
-  ))
+  const [messages] = useCollection(collection(db, 'users', session?.user?.email!, 'chats', id, 'messages'))
 
   useEffect(() => {
     if(!pathName) return
