@@ -9,9 +9,10 @@ type Props = {
 const ChatInput = ({chatId}: Props) => {
   const [prompt, setPrompt] = useState('')
   return (
-    <div>
-      <form className="p-5 space-x-5 flex-1">
+    <div className="bg-gray-700/50 text-gray-400 rounded-lg text-sm focus:outline-none">
+      <form className="p-5 space-x-5 flex">
         <input type="text"
+               className="bg-transparent focus:outline-none flex-1"
                placeholder="Type a message"
                value={prompt}
                onChange={(e) => setPrompt(e.target.value)}
