@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Link from "next/link";
 import {ChatBubbleLeftIcon} from "@heroicons/react/24/outline";
 import {TrashIcon} from "@heroicons/react/24/outline";
@@ -21,8 +21,13 @@ const ChatRow = ({id}: Props) => {
     orderBy('createdAt', 'asc')
   ))
 
+  useEffect(() => {
+    if(!pathName) return
+    setActive(pathName.includes(id))
+  }, [pathName])
+
   return (
-    <Link className={`chatRow justify-center`} href={`chat/${id}`}>
+    <Link className={`chatRow justify-center ${active && 'bg-gray-700/50'}`} href={`chat/${id}`}>
       <ChatBubbleLeftIcon className="h-5 w-5" />
       <p className="flex-1 hidden md:inline-flex truncate">
         {messages?.docs[messages?.docs.length - 1]?.data().text() || 'New Chat'}
