@@ -4,6 +4,7 @@ import {PaperAirplaneIcon} from "@heroicons/react/20/solid";
 import {useSession} from "next-auth/react";
 import {addDoc, collection, serverTimestamp} from "@firebase/firestore";
 import {db} from "../firebase";
+import toast from "react-hot-toast";
 
 type Props = {
   chatId: string
@@ -31,6 +32,9 @@ const ChatInput = ({chatId}: Props) => {
     }
 
     await addDoc(collection(db, 'users', session?.user?.email!, 'chats', chatId, 'messages'), message)
+
+    const notification = toast.loading('ChatGPT is thinking...')
+
     await fetch(`/api/askQuestion`, {
       method: 'POST',
       headers: {
@@ -44,6 +48,9 @@ const ChatInput = ({chatId}: Props) => {
       }),
     }).then((res) => {
       // Toast notification
+      toast.success('ChatGPT has responded!', {
+        id: notification
+      })
     })
   }
 
