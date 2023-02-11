@@ -2,6 +2,8 @@
 import React, {FormEvent, useState} from 'react';
 import {PaperAirplaneIcon} from "@heroicons/react/20/solid";
 import {useSession} from "next-auth/react";
+import {addDoc, collection, serverTimestamp} from "@firebase/firestore";
+import {db} from "../firebase";
 
 type Props = {
   chatId: string
@@ -11,10 +13,35 @@ const ChatInput = ({chatId}: Props) => {
   const [prompt, setPrompt] = useState('')
   const {data: session} = useSession()
 
-  const sendMessage = (e: FormEvent<HTMLFormElement>) => {
+  const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (!prompt) return
+    const input = prompt.trim()
+    setPrompt('')
 
+    const message: Message = {
+      text: input,
+      createdAt: serverTimestamp(),
+      user: {
+        _id: session?.user?.email!,
+        name: session?.user?.name!,
+        avatar: session?.user?.image! || `https://ui-avatars.com/api/?name=${session?.user?.name!}`,
+      }
+    }
 
+    await addDoc(collection(db, 'users', session?.user?.email!, 'chats', chatId, 'messages'), message)
+    await fetch(`/api/askQuestion`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        prompt: input,
+        chatId: chatId,
+        model: '',
+        session: session
+      }),
+    })
   }
 
   return (
