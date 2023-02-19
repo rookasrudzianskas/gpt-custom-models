@@ -18,3 +18,6 @@ python train.py --dataset <path to dataset> --model_name <model name>
 
 The model will be saved in the `models` directory. The model name should be a unique identifier for the model. It will be used to identify the model when using it in the [Chat GPT](https://chatgpt.com) project.
 
+### Live Version:
+
+https://rookas-gpt-custom-models.vercel.app/
