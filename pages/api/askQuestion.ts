@@ -1,4 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import query from "../../lib/queryApi";
 import admin from "firebase-admin";
@@ -32,7 +31,7 @@ export default async function handler(
     text: response || 'ChatGPT was unable to find an answer to your question. Please try again later.',
     createdAt: admin.firestore.Timestamp.now(),
     user: {
-      _id: 'CHatGPT',
+      _id: 'ChatGPT',
       name: 'ChatGPT',
       avatar: 'https://links.papareact.com/89k',
     }
