@@ -21,3 +21,19 @@ The model will be saved in the `models` directory. The model name should be a un
 ### Live Version:
 
 https://rookas-gpt-custom-models.vercel.app/
+
+### Local Development:
+    
+    ```
+    npm install
+    npm run dev
+    ```
+
+### Deploy to Vercel:
+
+    ```
+    npm install -g vercel
+    vercel
+    ```
+
+### By Rokas with ❤️
